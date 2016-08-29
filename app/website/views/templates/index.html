@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  <title>Trafico</title>
+{% endblock %}
+
+{% block content %}
+  <section>
+    Inicio donde las personas veran los lugares y como esta el trafico
+  </section>
+{% endblock %}
+{% block script %}
+  {% parent %}
+  <script src="http://192.168.1.106:5000/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io.connect('http://192.168.1.106:5000');
+      navigator.geolocation.watchPosition(function(position){
+        socket.emit('coor',position.coords.latitude);
+      });
+    </script>
+    <script src="js/index.js"></script>
+{% endblock %}
